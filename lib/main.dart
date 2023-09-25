@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:text_collector/controller/home_provider.dart';
 import 'package:text_collector/controller/splash_provider.dart';
+import 'package:text_collector/model/db_functions.dart';
 import 'package:text_collector/view/splash_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initDataBases();
   runApp(const MyApp());
 }
 
@@ -15,7 +19,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (BuildContext context) => SplashScreenProvider())
+            create: (BuildContext context) => HomeProvider()),
+        ChangeNotifierProvider(
+            create: (BuildContext context) => SplashScreenProvider()),
       ],
       child: MaterialApp(
         title: 'Text Collector',

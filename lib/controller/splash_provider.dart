@@ -6,7 +6,7 @@ import 'package:text_collector/view/home_screen.dart';
 class SplashScreenProvider with ChangeNotifier {
   void gotoHomeScreen(BuildContext context) {
     Timer(
-      Duration(
+      const Duration(
           seconds:
               2), // Set the duration for which the splash screen will appear
       () {
@@ -18,6 +18,5 @@ class SplashScreenProvider with ChangeNotifier {
         );
       },
     );
-    notifyListeners();
   }
 }
