@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<HomeProvider>(context, listen: false);
     Provider.of<HomeProvider>(context).fetchData();
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
           final pickedFile =
               await ImagePicker().pickImage(source: ImageSource.gallery);
           if (pickedFile != null) {
-            // processImage(pickedFile.path);
+            provider.cropImage(pickedFile.path, context);
           }
         },
         child: const Icon(Icons.add),
