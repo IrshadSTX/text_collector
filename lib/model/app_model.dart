@@ -1,23 +1,26 @@
 class AppModel {
-  int? id;
   final String title;
   final String imagePath;
+  final DateTime date; // Add DateTime property
 
-  AppModel({required this.title, required this.imagePath, required int id});
+  AppModel({required this.title, required this.imagePath, required this.date});
+
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'title': title,
-      'imagePath': imagePath // Store as 1 for true, 0 for false
+      'imagePath': imagePath,
+      'date':
+          date.toIso8601String(), // Convert DateTime to a string for storage
     };
   }
 
-  // Create a Task object from a Map
   factory AppModel.fromMap(Map<String, dynamic> map) {
     return AppModel(
-      id: map['id'],
       title: map['title'],
-      imagePath: map['imagePath'], // Convert back to bool
+      imagePath: map['imagePath'],
+      date: map['date'] != null
+          ? DateTime.parse(map['date'])
+          : DateTime.now(), // Provide a default DateTime if null
     );
   }
 }

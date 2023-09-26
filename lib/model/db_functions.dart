@@ -13,18 +13,9 @@ Future<void> initDataBases() async {
   );
 }
 
-Future<List<AppModel>> getAllData() async {
-  final List<Map<String, dynamic>> result =
-      await db.rawQuery('SELECT * FROM text_table');
-  final data = result.map((map) => AppModel.fromMap(map)).toList();
-
-  return data;
-}
-
 Future<void> addData(AppModel textData) async {
   await db.rawInsert(
       'INSERT INTO text_table(title,imagePath)VALUES("${textData.title}","${textData.imagePath}")');
 }
 
 Future<void> updateData() async {}
-Future<void> deleteData() async {}
