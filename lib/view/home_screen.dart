@@ -2,9 +2,12 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:text_collector/controller/home_provider.dart';
+import 'package:text_collector/view/widgets/floating_speed_dial.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,16 +23,7 @@ class HomeScreen extends StatelessWidget {
     log('hi');
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final pickedFile =
-              await ImagePicker().pickImage(source: ImageSource.gallery);
-          if (pickedFile != null) {
-            provider.cropImage(pickedFile.path, context);
-          }
-        },
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: const FloatingSpeedDialWidget(),
       appBar: AppBar(
         backgroundColor: Colors.amber,
         title: const Text(
@@ -40,6 +34,11 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Consumer<HomeProvider>(builder: (context, value, child) {
+          if (value.data.isEmpty) {
+            return Center(
+              child: Text('Select Image'),
+            );
+          }
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -60,9 +59,9 @@ class HomeScreen extends StatelessWidget {
                   child: SizedBox(
                       height: size.height * .5,
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(6.0),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Container(
                               width: size.width * .1,
@@ -81,18 +80,32 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 IconButton(
                                     onPressed: () async {
-                                      await value.deleteData(index);
+                                      await value.deleteData(item.id!);
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.delete,
-                                      size: 18,
+                                      size: 16,
                                     )),
-                                Text('1'),
+                                Text(
+                                  value.formatTimestamp(item.date!),
+                                  style: const TextStyle(fontSize: 10),
+                                ),
                                 IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
+                                    onPressed: () {
+                                      Clipboard.setData(ClipboardData(
+                                        text: item.title,
+                                      ));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content:
+                                              Text("Text copied to clipboard"),
+                                        ),
+                                      );
+                                    },
+                                    icon: const Icon(
                                       Icons.copy,
-                                      size: 18,
+                                      size: 16,
                                     )),
                               ],
                             ),

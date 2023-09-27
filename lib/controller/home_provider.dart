@@ -21,7 +21,6 @@ class HomeProvider with ChangeNotifier {
     final List<Map<String, dynamic>> result =
         await db.rawQuery('SELECT * FROM text_table');
     final data = result.map((map) => AppModel.fromMap(map)).toList();
-
     return data;
   }
 
@@ -74,11 +73,12 @@ class HomeProvider with ChangeNotifier {
     final recognisedText = await textDetector.processImage(inputImage);
     final finalText = recognisedText.text;
     storeData(finalText, croppedImage);
+    fetchData();
     textDetector.close();
   }
 
   Future<void> storeData(String finalText, File selectedImage) async {
-    DateTime currentTime = DateTime.now();
+    final currentTime = DateTime.now();
     final appmodel = AppModel(
         title: finalText, imagePath: selectedImage.path, date: currentTime);
     await addData(appmodel);
@@ -102,9 +102,13 @@ class HomeProvider with ChangeNotifier {
   //db functionssssss
   Future<void> deleteData(int index) async {
     await db.rawDelete('DELETE FROM text_table WHERE id = ?', [index]);
+    fetchData();
     log('deleted $index ');
     notifyListeners();
-    getAllData();
+  }
+
+  Future<void> clearTable() async {
+    await db.delete('text_table');
     notifyListeners();
   }
 }

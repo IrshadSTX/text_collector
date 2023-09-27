@@ -10,12 +10,9 @@ class SplashScreenProvider with ChangeNotifier {
           seconds:
               2), // Set the duration for which the splash screen will appear
       () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  HomeScreen()), // Replace with your main screen widget
-        );
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            (route) => false);
       },
     );
   }
