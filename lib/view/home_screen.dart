@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart';
+
 import 'package:text_collector/controller/home_provider.dart';
 import 'package:text_collector/view/widgets/floating_speed_dial.dart';
 

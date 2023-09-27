@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 class AppModel {
   final int? id;
   final String title;
@@ -16,18 +14,19 @@ class AppModel {
     return {
       'title': title,
       'imagePath': imagePath,
-      'date': date, // Convert DateTime to a string for storage
+      'date':
+          date?.toIso8601String(), // Convert DateTime to a string for storage
     };
   }
 
   factory AppModel.fromMap(Map<String, dynamic> map) {
-    log(map.toString());
     return AppModel(
-        id: map['id'],
-        title: map['title'],
-        imagePath: map['imagePath'],
-        date:
-            map['date'] ?? DateTime.now() // Provide a default DateTime if null
-        );
+      id: map['id'],
+      title: map['title'],
+      imagePath: map['imagePath'],
+      date: map['date'] != null
+          ? DateTime.parse(map['date'])
+          : null, // Convert the stored string back to DateTime
+    );
   }
 }

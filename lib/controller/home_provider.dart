@@ -13,7 +13,8 @@ class HomeProvider with ChangeNotifier {
   File? selectedImage;
   List<AppModel> data = [];
   Future<void> fetchData() async {
-    data = await getAllData();
+    List<AppModel> fetchedData = await getAllData();
+    data = List.from(fetchedData.reversed); // Reversing the list
     notifyListeners();
   }
 
@@ -72,15 +73,20 @@ class HomeProvider with ChangeNotifier {
 
     final recognisedText = await textDetector.processImage(inputImage);
     final finalText = recognisedText.text;
-    storeData(finalText, croppedImage);
+    final currentTime = DateTime.now();
+    storeData(finalText, croppedImage, currentTime);
     fetchData();
     textDetector.close();
   }
 
-  Future<void> storeData(String finalText, File selectedImage) async {
+  Future<void> storeData(
+      String finalText, File selectedImage, DateTime currentTime) async {
     final currentTime = DateTime.now();
     final appmodel = AppModel(
-        title: finalText, imagePath: selectedImage.path, date: currentTime);
+      title: finalText,
+      imagePath: selectedImage.path,
+      date: currentTime,
+    );
     await addData(appmodel);
   }
 

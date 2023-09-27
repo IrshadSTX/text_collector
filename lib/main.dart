@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => SplashScreenProvider()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Text Collector',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

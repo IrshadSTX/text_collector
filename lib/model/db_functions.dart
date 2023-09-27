@@ -8,14 +8,14 @@ Future<void> initDataBases() async {
     version: 1,
     onCreate: (db, version) async {
       await db.execute(
-          'CREATE TABLE text_table (id INTEGER PRIMARY KEY, title TEXT, imagePath TEXT)');
+          'CREATE TABLE text_table (id INTEGER PRIMARY KEY, title TEXT, imagePath TEXT,date TEXT)');
     },
   );
 }
 
 Future<void> addData(AppModel textData) async {
   await db.rawInsert(
-      'INSERT INTO text_table(title,imagePath)VALUES("${textData.title}","${textData.imagePath}")');
+      'INSERT INTO text_table(title,imagePath,date) VALUES("${textData.title}","${textData.imagePath}","${textData.date!.toIso8601String()}")');
 }
 
 Future<void> updateData() async {}

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class TextContainerWidget extends StatelessWidget {
+class TextEditPage extends StatelessWidget {
   final String text;
 
-  TextContainerWidget({required this.text});
+  const TextEditPage({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
