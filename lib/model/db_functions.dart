@@ -18,4 +18,9 @@ Future<void> addData(AppModel textData) async {
       'INSERT INTO text_table(title,imagePath,date) VALUES("${textData.title}","${textData.imagePath}","${textData.date!.toIso8601String()}")');
 }
 
-Future<void> updateData() async {}
+Future<void> updateData(String title) async {
+  await db.rawUpdate('UPDATE text_table SET title = ?', [
+    '$title',
+  ]);
+  print('updated: $title');
+}

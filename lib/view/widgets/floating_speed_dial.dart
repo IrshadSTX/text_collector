@@ -23,8 +23,12 @@ class FloatingSpeedDialWidget extends StatelessWidget {
           onPressed: () {
             if (provider.data.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('No data for reset.'),
+                const SnackBar(
+                  backgroundColor: Colors.blueGrey,
+                  content: Text(
+                    'No data for reset.',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               );
               return;
@@ -34,14 +38,14 @@ class FloatingSpeedDialWidget extends StatelessWidget {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text(
-                    'Delete note',
+                    'Reset Text Collector',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   content: const SingleChildScrollView(
                     child: ListBody(
                       children: <Widget>[
                         Text(
-                          'This note will be deleted',
+                          'Text Collectors will no longer active',
                         ),
                       ],
                     ),

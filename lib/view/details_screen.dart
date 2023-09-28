@@ -1,57 +1,124 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:text_collector/controller/home_provider.dart';
+import 'package:text_collector/view/widgets/edit_text_widget.dart';
 
-class TextEditPage extends StatelessWidget {
+import 'package:text_collector/view/widgets/show_dialogue_widget.dart';
+
+// ignore: must_be_immutable
+class DetailsScreen extends StatelessWidget {
   final String text;
+  final File imageUrl;
 
-  const TextEditPage({super.key, required this.text});
+  DetailsScreen({super.key, required this.text, required this.imageUrl});
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Edit Mode',
-                style: TextStyle(fontWeight: FontWeight.bold),
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Details',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.blue, Colors.indigo],
               ),
-              Row(
+            ),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.copy),
+              onPressed: () {},
+              color: Colors.white,
+            ),
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return EditDialog(
+                      text: text,
+                    );
+                  },
+                );
+              },
+              icon: Icon(Icons.edit),
+              color: Colors.white,
+            ),
+            IconButton(
+              icon: const Icon(Icons.share),
+              onPressed: () {},
+              color: Colors.white,
+            ),
+          ],
+        ),
+        body: Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.copy),
-                    onPressed: () {
-                      // Implement copy functionality here
-                      // You can use Flutter's Clipboard class
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.share),
-                    onPressed: () {
-                      // Implement share functionality here
-                    },
+                  const SizedBox(height: 10.0),
+                  Expanded(
+                    child: TextFormField(
+                        readOnly: true,
+                        initialValue: text,
+                        maxLines: null, // Allows unlimited lines
+                        keyboardType: TextInputType.multiline,
+                        style: const TextStyle(
+                            color: Colors.black), // Change text color
+                        decoration: InputDecoration.collapsed(hintText: text)),
                   ),
                 ],
               ),
-            ],
-          ),
-          SizedBox(height: 10.0),
-          TextFormField(
-            initialValue: text,
-            maxLines: null, // Allows unlimited lines
-            keyboardType: TextInputType.multiline,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
             ),
-          ),
-        ],
-      ),
-    );
+            Positioned(
+                right: 20,
+                bottom: 40,
+                child: Card(
+                  color: Colors.indigo,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  elevation: 20,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return ShowImageDialog(imageUrl: imageUrl);
+                            },
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          child: SizedBox(
+                              width: size.width * .5,
+                              child: Image.file(imageUrl)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ))
+          ],
+        ));
   }
 }

@@ -105,6 +105,8 @@ class HomeProvider with ChangeNotifier {
     }
   }
 
+  //editing screeeen
+
   //db functionssssss
   Future<void> deleteData(int index) async {
     await db.rawDelete('DELETE FROM text_table WHERE id = ?', [index]);
