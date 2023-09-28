@@ -38,10 +38,12 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AboutScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AboutScreen()));
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.info_outline,
                 color: Colors.yellow,
               ))

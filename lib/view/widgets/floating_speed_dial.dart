@@ -64,6 +64,7 @@ class FloatingSpeedDialWidget extends StatelessWidget {
                       ),
                       onPressed: () async {
                         await provider.clearTable();
+                        // ignore: use_build_context_synchronously
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => const SplashScreen()));
                       },
@@ -83,6 +84,7 @@ class FloatingSpeedDialWidget extends StatelessWidget {
             final pickedFile =
                 await ImagePicker().pickImage(source: ImageSource.gallery);
             if (pickedFile != null) {
+              // ignore: use_build_context_synchronously
               provider.cropImage(pickedFile.path, context);
             }
           },

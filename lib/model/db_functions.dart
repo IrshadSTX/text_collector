@@ -23,5 +23,4 @@ Future<void> updateData(String newTitle, int id) async {
     'UPDATE text_table SET title = ? WHERE id = ?',
     [newTitle, id],
   );
-  print('updated: $newTitle');
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:text_collector/controller/home_provider.dart';
+
 import 'package:text_collector/model/db_functions.dart';
-import 'package:text_collector/view/details_screen.dart';
+
 import 'package:text_collector/view/home_screen.dart';
 
 class EditDialog extends StatefulWidget {
@@ -47,8 +46,9 @@ class _EditDialogState extends State<EditDialog> {
           onPressed: () async {
             await updateData(textController.text, widget.id!);
 
+            // ignore: use_build_context_synchronously
             Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
                 (route) => false);
             // Close the dialog
           },

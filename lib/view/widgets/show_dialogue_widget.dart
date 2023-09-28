@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ShowImageDialog extends StatelessWidget {
   final File imageUrl;
 
-  const ShowImageDialog({required this.imageUrl});
+  const ShowImageDialog({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

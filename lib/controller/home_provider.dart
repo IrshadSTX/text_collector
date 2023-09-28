@@ -63,6 +63,7 @@ class HomeProvider with ChangeNotifier {
     if (croppedFile != null) {
       File croppedImage = File(croppedFile.path);
       setSelectedImage(croppedImage);
+      // ignore: use_build_context_synchronously
       textRecoginition(context, croppedImage);
     }
   }
