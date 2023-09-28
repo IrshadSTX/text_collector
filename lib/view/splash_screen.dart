@@ -7,13 +7,23 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     Provider.of<SplashScreenProvider>(context, listen: false)
         .gotoHomeScreen(context);
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text(
-          'Text Collector',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/logo.png',
+              width: size.width * 0.2,
+            ),
+            Image.asset(
+              'assets/images/textcollector.png',
+              width: size.width * 0.2,
+            )
+          ],
         ),
       ),
     );
