@@ -24,9 +24,9 @@ Container CardWidget(Size size, File imageFile, AppModel item,
           ],
         ),
       ),
-      height: size.height * .5,
+      height: size.height * .6,
       child: Padding(
-        padding: const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -37,6 +37,7 @@ Container CardWidget(Size size, File imageFile, AppModel item,
             ),
             Text(
               item.title.toUpperCase(),
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -57,7 +58,7 @@ Container CardWidget(Size size, File imageFile, AppModel item,
                     },
                     icon: const Icon(
                       Icons.close,
-                      size: 20,
+                      size: 18,
                       color: Colors.white70,
                     )),
                 IconButton(

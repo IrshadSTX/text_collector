@@ -68,10 +68,10 @@ class HomeScreen extends StatelessWidget {
           }
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-            ),
+                crossAxisCount: 2,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: .8),
             itemBuilder: (context, index) {
               final item = value.data[index];
               final imageFile = File(item.imagePath);
