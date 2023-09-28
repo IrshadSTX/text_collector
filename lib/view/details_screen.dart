@@ -123,7 +123,7 @@ class DetailsScreen extends StatelessWidget {
                           );
                         },
                         child: SizedBox(
-                          width: size.width * .5,
+                          width: size.width * .4,
                           child: ClipRRect(
                             borderRadius: const BorderRadius.all(
                               Radius.circular(20),

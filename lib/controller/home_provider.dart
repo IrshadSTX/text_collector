@@ -15,6 +15,7 @@ class HomeProvider with ChangeNotifier {
   Future<void> fetchData() async {
     List<AppModel> fetchedData = await getAllData();
     data = List.from(fetchedData.reversed); // Reversing the list
+    setLoading(false);
     notifyListeners();
   }
 
@@ -106,6 +107,14 @@ class HomeProvider with ChangeNotifier {
     }
   }
 
+  //shimmer
+  bool isLoading = true; // Initialize as true to show loading initially
+
+  // Method to update loading status
+  void setLoading(bool value) {
+    isLoading = value;
+    notifyListeners();
+  }
   //editing screeeen
   // String editedTitle = '';
   // void setEditedTitle(String value) {

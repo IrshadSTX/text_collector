@@ -90,10 +90,10 @@ class FloatingSpeedDialWidget extends StatelessWidget {
           },
         ),
       ],
-      closedForegroundColor: Colors.black,
+      closedForegroundColor: Colors.indigo,
       openForegroundColor: Colors.white,
       closedBackgroundColor: Colors.white,
-      openBackgroundColor: Colors.black,
+      openBackgroundColor: Colors.indigo,
       child: const Icon(Icons.menu),
     );
   }
