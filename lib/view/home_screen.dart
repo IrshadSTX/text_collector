@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:text_collector/controller/home_provider.dart';
+import 'package:text_collector/view/about_screen.dart';
 
 import 'package:text_collector/view/details_screen.dart';
 import 'package:text_collector/view/widgets/card_widget.dart';
@@ -34,6 +35,17 @@ class HomeScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AboutScreen()));
+              },
+              icon: Icon(
+                Icons.info_outline,
+                color: Colors.yellow,
+              ))
+        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(

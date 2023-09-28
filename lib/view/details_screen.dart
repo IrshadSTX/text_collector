@@ -122,13 +122,14 @@ class DetailsScreen extends StatelessWidget {
                             },
                           );
                         },
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(10),
+                        child: SizedBox(
+                          width: size.width * .5,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            child: Image.file(imageUrl),
                           ),
-                          child: SizedBox(
-                              width: size.width * .5,
-                              child: Image.file(imageUrl)),
                         ),
                       ),
                     ),
