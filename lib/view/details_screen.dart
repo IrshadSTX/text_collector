@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:text_collector/controller/home_provider.dart';
+import 'package:flutter/services.dart';
+import 'package:share_plus/share_plus.dart';
+
 import 'package:text_collector/view/widgets/edit_text_widget.dart';
 
 import 'package:text_collector/view/widgets/show_dialogue_widget.dart';
@@ -11,10 +12,10 @@ import 'package:text_collector/view/widgets/show_dialogue_widget.dart';
 class DetailsScreen extends StatelessWidget {
   final String text;
   final File imageUrl;
+  final int? id;
+  const DetailsScreen(
+      {super.key, required this.text, required this.imageUrl, this.id});
 
-  DetailsScreen({super.key, required this.text, required this.imageUrl});
-
-  @override
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -36,7 +37,16 @@ class DetailsScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.copy),
-              onPressed: () {},
+              onPressed: () {
+                Clipboard.setData(ClipboardData(
+                  text: text,
+                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Text copied to clipboard"),
+                  ),
+                );
+              },
               color: Colors.white,
             ),
             IconButton(
@@ -46,16 +56,19 @@ class DetailsScreen extends StatelessWidget {
                   builder: (context) {
                     return EditDialog(
                       text: text,
+                      id: id,
                     );
                   },
                 );
               },
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
               color: Colors.white,
             ),
             IconButton(
               icon: const Icon(Icons.share),
-              onPressed: () {},
+              onPressed: () {
+                Share.share(text);
+              },
               color: Colors.white,
             ),
           ],
@@ -71,6 +84,9 @@ class DetailsScreen extends StatelessWidget {
                   const SizedBox(height: 10.0),
                   Expanded(
                     child: TextFormField(
+                        // onChanged: (value) {
+                        //   data.setEditedTitle(value);
+                        // },
                         readOnly: true,
                         initialValue: text,
                         maxLines: null, // Allows unlimited lines

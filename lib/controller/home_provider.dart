@@ -106,6 +106,11 @@ class HomeProvider with ChangeNotifier {
   }
 
   //editing screeeen
+  // String editedTitle = '';
+  // void setEditedTitle(String value) {
+  //   editedTitle = value;
+  //   notifyListeners();
+  // }
 
   //db functionssssss
   Future<void> deleteData(int index) async {

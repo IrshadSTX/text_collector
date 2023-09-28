@@ -2,13 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:text_collector/controller/home_provider.dart';
 
-import 'package:text_collector/model/app_model.dart';
 import 'package:text_collector/view/details_screen.dart';
 import 'package:text_collector/view/widgets/card_widget.dart';
 import 'package:text_collector/view/widgets/floating_speed_dial.dart';
@@ -57,8 +55,8 @@ class HomeScreen extends StatelessWidget {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
             ),
             itemBuilder: (context, index) {
               final item = value.data[index];
@@ -70,6 +68,7 @@ class HomeScreen extends StatelessWidget {
                       builder: (context) => DetailsScreen(
                             text: item.title,
                             imageUrl: imageFile,
+                            id: item.id,
                           )));
                 },
                 child: CardWidget(size, imageFile, item, value, context),

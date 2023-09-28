@@ -31,8 +31,8 @@ Container CardWidget(Size size, File imageFile, AppModel item,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(
-              width: size.width * .1,
-              height: size.height * .08,
+              width: size.width * .35,
+              height: size.height * .1,
               child: Image.file(imageFile),
             ),
             Text(
@@ -40,7 +40,7 @@ Container CardWidget(Size size, File imageFile, AppModel item,
               style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white70),
+                  color: Colors.white),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -56,9 +56,9 @@ Container CardWidget(Size size, File imageFile, AppModel item,
                       await value.deleteData(item.id!);
                     },
                     icon: const Icon(
-                      Icons.delete,
-                      size: 18,
-                      color: Colors.red,
+                      Icons.close,
+                      size: 20,
+                      color: Colors.white70,
                     )),
                 IconButton(
                     onPressed: () {
